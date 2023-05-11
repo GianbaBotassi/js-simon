@@ -15,48 +15,71 @@ const elGame = document.getElementById('game');
 // Associo div container per innerHTML
 const container = document.getElementById('container');
 
+// Associo container per far comparire bottone send
+const contBottomSend = document.getElementById('cont_bottom_send');
 
 let score = 0;
 
 let numIndovinati = [];
 
-
-
-
+let numSbagliati = [];
 
 elGame.addEventListener('click',
     () =>{
+        container.innerHTML = "";
 
         innerRandNum();
 
-        let clock = setInterval(ciao,10000)
+        let clock = setInterval(addContNumb,30000)
 
 
-        function ciao(){
+        function addContNumb(){
 
             clearInterval(clock);
 
             container.innerHTML = "";
 
-
-            // const ciao = createInputElement(5, container);
-
             for(let i = 0; i < arrayFiveRandomNum.length; i++){
 
-                const numUser = parseInt(prompt("inserisci 5 numeri diversi tra loro"));
-                arrayFiveUserNum.push(numUser);
-
+                const newElement = document.createElement("input");
+                newElement.classList.add('square');
+                newElement.setAttribute("type", "text");
+                container.append(newElement);
             }
 
-            console.log(arrayFiveUserNum);
-            console.log(arrayFiveRandomNum);
+            
 
-            let i = 0; 
+
+
+            // const bottomSendNumbers = document.createElement("div");
+            // bottomSendNumbers.classList.add('btn','btn-secondary', "bottom_send");
+            // contBottomSend.append(bottomSendNumbers);
+            // bottomSendNumbers.append('Send Numbers')
+
+
+
+            
+        }
+
+    }
+    )
+
+// Associo container per far comparire bottone send
+const btnSend = document.getElementById('btn_send');
+
+
+btnSend.addEventListener('click', 
+    function(){
+        for(let i = 0; i < 5; i++){
+            const inputNum = parseInt((document.getElementsByTagName("input")[i].value));
+            arrayFiveUserNum.push(inputNum)
+        }
+
+        let i = 0; 
 
             while( i < arrayFiveUserNum.length){
                 const numUser = arrayFiveUserNum[i];
 
-                console.log(numUser);
                 if (arrayFiveRandomNum.includes(numUser)) {
 
                     numIndovinati.push(numUser);
@@ -67,13 +90,17 @@ elGame.addEventListener('click',
                 i++
             }
             
-            const stringNumbers = numIndovinati.toString();
+            const strNumCorretti = numIndovinati.toString();
 
-            alert("hai totalizzato un punteggio di " + score + ". I numeri indovinati sono " + stringNumbers)
-        }
+            // const strNumSbagliati = numSbagliati.toString();
 
-    }
-    )
+
+
+
+
+            alert(`Hai totalizzato un punteggio di ${score}. 
+            Numeri indovinati : ${strNumCorretti}.`)
+    })
 
 
 
@@ -107,7 +134,13 @@ function randomNumberArray(totNum, min, max, array){
 function innerRandNum(){
     randomNumberArray(5, 1, 100, arrayFiveRandomNum);
     for(let i = 0; i < arrayFiveRandomNum.length; i++){
-        container.innerHTML += `<div>${arrayFiveRandomNum[i]}</div>`
+
+        const numContainer = document.createElement('div');
+        numContainer.classList.add('square');
+        container.append(numContainer);
+        numContainer.append(arrayFiveRandomNum[i]);
+
+        // container.innerHTML += `<div>${arrayFiveRandomNum[i]}</div>`
     }
 }
 

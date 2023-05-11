@@ -1,0 +1,44 @@
+/* General styles */
+
+
+
+/* Site section styles */
+header{
+    height: 20vh;
+}
+
+main{
+    height: 200px;
+    width: 70%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+.square{
+    background-color: blanchedalmond;
+    border: 1px solid black;
+    height: 100px;
+    width: 100px;
+    border-radius: 20px;
+    display: flex;
+    margin-right: 20px;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+}
+.btn{
+    font-size: 2rem;
+}
+#bottomSend{
+    height: 200px;
+}
+
+
+
+
+
+
+
+
+
+
