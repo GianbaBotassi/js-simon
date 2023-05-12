@@ -18,45 +18,97 @@ const container = document.getElementById('container');
 // Associo container per far comparire bottone send
 const contBottomSend = document.getElementById('cont_bottom_send');
 
-let score = 0;
+const elTimer = document.getElementById('clock');
+
 
 let numIndovinati = [];
 
 let numSbagliati = [];
 
+let clock;
+
 elGame.addEventListener('click',
     () =>{
         container.innerHTML = "";
+        contBottomSend.innerHTML= "";
 
         innerRandNum();
 
-        let clock = setInterval(addContNumb,30000)
+        let time = 11;  
+
+        clock = setInterval(addContNumb,1000)
 
 
         function addContNumb(){
 
-            clearInterval(clock);
+            time--;
+            elTimer.innerHTML = time;
 
-            container.innerHTML = "";
+            if(time === 0){
+                clearInterval(clock);
 
-            for(let i = 0; i < arrayFiveRandomNum.length; i++){
-
-                const newElement = document.createElement("input");
-                newElement.classList.add('square');
-                newElement.setAttribute("type", "text");
-                container.append(newElement);
+                        elTimer.innerHTML = "";
+                        container.innerHTML = "";
+            
+                        for(let i = 0; i < arrayFiveRandomNum.length; i++){
+            
+                            const newElement = document.createElement("input");
+                            newElement.classList.add('square','text-center');
+                            newElement.setAttribute("type", "text");
+                            container.append(newElement);
+                        }
+            
+                    
+                        const btnSend = document.createElement("div");
+                        btnSend.setAttribute("id","bottom_send");
+                        btnSend.classList.add('btn','btn-secondary');
+                        contBottomSend.append(btnSend);
+                        btnSend.append('Invia numeri')
+                        
+            
+                        // Associo container per far comparire bottone send
+                        const sendResults = document.getElementById('bottom_send');
+            
+            
+                        sendResults.addEventListener('click', 
+                        function(){
+                        for(let i = 0; i < 5; i++){
+                            const inputNum = parseInt((document.getElementsByTagName("input")[i].value));
+                            arrayFiveUserNum.push(inputNum)
+                        }
+            
+                        let score = 0;
+            
+                        let i = 0; 
+            
+                        while( i < arrayFiveUserNum.length){
+                            const numUser = arrayFiveUserNum[i];
+            
+                            if (arrayFiveRandomNum.includes(numUser)) {
+            
+                                numIndovinati.push(numUser);
+                                
+                                score++;
+                                
+                            }
+                            i++
+                        }
+                        
+                        const strNumCorretti = numIndovinati.toString();
+            
+                        sendResults.innerHTML= ""
+            
+                        const result = document.createElement("h2");
+                        sendResults.append(result);
+                        result.append(`Hai totalizzato un punteggio di ${score}. 
+                        Numeri indovinati : ${strNumCorretti}.`)
+            
+                })
             }
 
-            
 
 
-
-            // const bottomSendNumbers = document.createElement("div");
-            // bottomSendNumbers.classList.add('btn','btn-secondary', "bottom_send");
-            // contBottomSend.append(bottomSendNumbers);
-            // bottomSendNumbers.append('Send Numbers')
-
-
+            // 
 
             
         }
@@ -64,43 +116,7 @@ elGame.addEventListener('click',
     }
     )
 
-// Associo container per far comparire bottone send
-const btnSend = document.getElementById('btn_send');
 
-
-btnSend.addEventListener('click', 
-    function(){
-        for(let i = 0; i < 5; i++){
-            const inputNum = parseInt((document.getElementsByTagName("input")[i].value));
-            arrayFiveUserNum.push(inputNum)
-        }
-
-        let i = 0; 
-
-            while( i < arrayFiveUserNum.length){
-                const numUser = arrayFiveUserNum[i];
-
-                if (arrayFiveRandomNum.includes(numUser)) {
-
-                    numIndovinati.push(numUser);
-
-                    score++;
-                    
-                }
-                i++
-            }
-            
-            const strNumCorretti = numIndovinati.toString();
-
-            // const strNumSbagliati = numSbagliati.toString();
-
-
-
-
-
-            alert(`Hai totalizzato un punteggio di ${score}. 
-            Numeri indovinati : ${strNumCorretti}.`)
-    })
 
 
 

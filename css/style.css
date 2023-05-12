@@ -4,14 +4,24 @@
 
 /* Site section styles */
 header{
-    height: 20vh;
+    height: 100px;
 }
-
 main{
-    height: 200px;
     width: 70%;
     margin: 0 auto;
+}
+#container{
+    height: 300x;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+#clock{
+    height:100px;
+    font-size: 4rem;
+    display: flex;
+    align-items: center;
     justify-content: center;
 }
 .square{
@@ -29,8 +39,13 @@ main{
 .btn{
     font-size: 2rem;
 }
-#bottomSend{
+#cont_bottom_send{
     height: 200px;
+    display: flex;
+    align-items: center;
+}
+.good{
+    background-color: green;
 }
 
 
